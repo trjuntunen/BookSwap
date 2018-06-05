@@ -52,6 +52,6 @@ class InputFieldDesignManager {
     
     public func changePlaceHolderTextColor(textField: UITextField, color: UIColor, text: String) {
         textField.attributedPlaceholder = NSAttributedString(string: text,
-                                                               attributes: [NSAttributedStringKey.foregroundColor: color])
+                                                             attributes: [NSAttributedStringKey.foregroundColor: color])
     }
 }

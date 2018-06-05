@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     let inputDesign = InputFieldDesignManager()
     
     @IBOutlet weak var usernameField: UITextField!
@@ -21,11 +21,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupTextFieldDesign()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     @IBAction func createNewAccountButtonTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "createAccountSegue", sender: self)
     }
