@@ -32,7 +32,7 @@ class CreateAccountModalWindow: UIViewController {
         
         // Dims the background behind the account creation modal window.
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,7 +54,7 @@ class CreateAccountModalWindow: UIViewController {
         let touch = touches.first
         guard let location = touch?.location(in: self.view) else { return }
         if(!containerView.frame.contains(location)) {
-           dismiss(animated: true, completion: nil)
+            dismiss(animated: true, completion: nil)
         }
     }
     

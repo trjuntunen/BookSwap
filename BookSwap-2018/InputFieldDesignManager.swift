@@ -53,7 +53,7 @@ class InputFieldDesignManager {
     
     /**
      Changes the given text field text to the given color.
-    */
+     */
     func changePlaceHolderTextColor(textField: UITextField, color: UIColor, text: String) {
         textField.attributedPlaceholder = NSAttributedString(string: text,
                                                              attributes: [NSAttributedStringKey.foregroundColor: color])
@@ -63,7 +63,7 @@ class InputFieldDesignManager {
 extension UIViewController {
     func hideKeyboardOnTap() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-//        tap.cancelsTouchesInView = false
+        //        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
     

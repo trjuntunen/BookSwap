@@ -29,14 +29,14 @@ class LoginViewController: UIViewController {
     
     /**
      When create account button tapped, push segue to account creation modal window.
-    */
+     */
     @IBAction func createNewAccountButtonTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "createAccountSegue", sender: self)
     }
     
     /**
      Sets the specific design for the login text fields.
-    */
+     */
     private func setupLoginTextFieldDesign() {
         let loginTextFieldBorderColor: CGColor = UIColor.groupTableViewBackground.cgColor
         inputDesign.setInputFieldDesign(component: usernameField, cornerRadius: 5, borderWidth: 0.8, borderColor: loginTextFieldBorderColor)
@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
         let placeHolderTextColor: UIColor = UIColor.gray
         inputDesign.changePlaceHolderTextColor(textField: usernameField, color: placeHolderTextColor, text: "Username")
         inputDesign.changePlaceHolderTextColor(textField: passwordField, color: placeHolderTextColor, text: "Password")
-    
+        
     }
 }
 
