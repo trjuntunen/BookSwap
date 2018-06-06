@@ -11,14 +11,15 @@ import UIKit
 class InputFieldDesignManager {
     
     /**
-     Uses two helper methods roundInterfaceComponentCorners() and addWhiteBorderToComponent()
-     to set the design the for input fields on the login screen.
+     Uses helper methods to set the design the for input fields on the login screen.
+     Includes rounding the corners, and if it's a button, then adding left padding
+     and setting the border.
      */
     func setInputFieldDesign(component: UIControl, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: CGColor) {
-        // round the corners
         roundInterfaceComponentCorners(component: component, amount: cornerRadius)
         if(!component.isKind(of: UIButton.self)) {
             addBorderToComponent(component: component, borderWidth: borderWidth, color: borderColor)
+            addLeftPaddingToTextField(textField: component as! UITextField)
         }
     }
     
@@ -26,7 +27,7 @@ class InputFieldDesignManager {
      Helper method for setInputFieldDesign() function to round the corners
      for a UI component for the given amount.
      */
-    public func roundInterfaceComponentCorners(component: UIControl, amount: CGFloat) {
+    private func roundInterfaceComponentCorners(component: UIControl, amount: CGFloat) {
         component.layer.cornerRadius = amount
     }
     
@@ -34,7 +35,7 @@ class InputFieldDesignManager {
      Helper method for setInputFieldDesign() function to add a light border with a given width to
      a UI component.
      */
-    public func addBorderToComponent(component: UIControl, borderWidth: CGFloat, color: CGColor) {
+    private func addBorderToComponent(component: UIControl, borderWidth: CGFloat, color: CGColor) {
         if(!component.isKind(of: UIButton.self)) {
             component.layer.borderWidth = borderWidth
             component.layer.borderColor = color
@@ -44,14 +45,29 @@ class InputFieldDesignManager {
     /**
      Adds a little left padding to the text fields.
      */
-    public func addLeftPaddingToTextField(textField: UITextField) {
+    private func addLeftPaddingToTextField(textField: UITextField) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
         textField.leftViewMode = .always
         textField.leftView = paddingView
     }
     
-    public func changePlaceHolderTextColor(textField: UITextField, color: UIColor, text: String) {
+    /**
+     Changes the given text field text to the given color.
+    */
+    func changePlaceHolderTextColor(textField: UITextField, color: UIColor, text: String) {
         textField.attributedPlaceholder = NSAttributedString(string: text,
                                                              attributes: [NSAttributedStringKey.foregroundColor: color])
+    }
+}
+
+extension UIViewController {
+    func hideKeyboardOnTap() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+//        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

@@ -26,12 +26,13 @@ class CreateAccountModalWindow: UIViewController {
         
         // Set the style for the text fields for account creation information.
         self.setTextFieldDesign()
+        self.hideKeyboardOnTap()
         
         containerView.layer.cornerRadius = 5
         
         // Dims the background behind the account creation modal window.
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,6 +50,14 @@ class CreateAccountModalWindow: UIViewController {
         // invalid requirements for username password or email
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        guard let location = touch?.location(in: self.view) else { return }
+        if(!containerView.frame.contains(location)) {
+           dismiss(animated: true, completion: nil)
+        }
+    }
+    
     /**
      Adds a darkgray border and left padding for all the text fields for
      account creation.
@@ -57,29 +66,12 @@ class CreateAccountModalWindow: UIViewController {
         let lightgray = UIColor.lightGray.cgColor
         
         // Add a 0.8 wide, darkgray border to all the text fields.
-        inputDesign.addBorderToComponent(component: firstName, borderWidth: 0.8, color: lightgray)
-        inputDesign.addBorderToComponent(component: lastName, borderWidth: 0.8, color: lightgray)
-        inputDesign.addBorderToComponent(component: username, borderWidth: 0.8, color: lightgray)
-        inputDesign.addBorderToComponent(component: password, borderWidth: 0.8, color: lightgray)
-        inputDesign.addBorderToComponent(component: email, borderWidth: 0.8, color: lightgray)
-        inputDesign.addBorderToComponent(component: retypedEmailed, borderWidth: 0.8, color: lightgray)
-        
-        // round the corners of the textboxes.
-        inputDesign.roundInterfaceComponentCorners(component: firstName, amount: 5)
-        inputDesign.roundInterfaceComponentCorners(component: lastName, amount: 5)
-        inputDesign.roundInterfaceComponentCorners(component: username, amount: 5)
-        inputDesign.roundInterfaceComponentCorners(component: password, amount: 5)
-        inputDesign.roundInterfaceComponentCorners(component: email, amount: 5)
-        inputDesign.roundInterfaceComponentCorners(component: retypedEmailed, amount: 5)
-        inputDesign.roundInterfaceComponentCorners(component: createAccountButton, amount: 5)
-        
-        // Add left padding to all the text fields.
-        inputDesign.addLeftPaddingToTextField(textField: firstName)
-        inputDesign.addLeftPaddingToTextField(textField: lastName)
-        inputDesign.addLeftPaddingToTextField(textField: username)
-        inputDesign.addLeftPaddingToTextField(textField: password)
-        inputDesign.addLeftPaddingToTextField(textField: email)
-        inputDesign.addLeftPaddingToTextField(textField: retypedEmailed)
+        inputDesign.setInputFieldDesign(component: firstName, cornerRadius: 5, borderWidth: 0.8, borderColor: lightgray)
+        inputDesign.setInputFieldDesign(component: lastName, cornerRadius: 5, borderWidth: 0.8, borderColor: lightgray)
+        inputDesign.setInputFieldDesign(component: username, cornerRadius: 5, borderWidth: 0.8, borderColor: lightgray)
+        inputDesign.setInputFieldDesign(component: password, cornerRadius: 5, borderWidth: 0.8, borderColor: lightgray)
+        inputDesign.setInputFieldDesign(component: email, cornerRadius: 5, borderWidth: 0.8, borderColor: lightgray)
+        inputDesign.setInputFieldDesign(component: retypedEmailed, cornerRadius: 5, borderWidth: 0.8, borderColor: lightgray)
         
     }
     
